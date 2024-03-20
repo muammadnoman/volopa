@@ -1,0 +1,20 @@
+{
+    "CompanyWalletBalance": {
+        "Viewallcurrencies":"button[class='ant-btn ant-btn-link medium fs-18px right-align-text'] span",
+        "EUR_convt":"tbody tr:nth-child(2) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "GBPtoEUR":"tbody tr:nth-child(3) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "USDtoEUR":"tbody tr:nth-child(4) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "AUDtoEUR":"tbody tr:nth-child(5) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "CADtoEUR":"tbody tr:nth-child(6) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "CHFtoEUR":"tbody tr:nth-child(7) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "DKKtoEUR":"tbody tr:nth-child(8) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "HKDtoEUR":"tbody tr:nth-child(9) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "JPYtoEUR":"tbody tr:nth-child(10) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "NOKtoEUR":"tbody tr:nth-child(11) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "NZDtoEUR":"tbody tr:nth-child(12) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "PLNtoEUR":"tbody tr:nth-child(13) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "SEKtoEUR":"tbody tr:nth-child(14) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "ZARtoEUR":"tbody tr:nth-child(15) td:nth-child(4) div:nth-child(1) div:nth-child(1)",
+        "TotalEURvalue":"div[class='ant-row m-t-10'] span[class='ant-typography muli semi-bold fs-18px dark-green']"
+    }
+}
