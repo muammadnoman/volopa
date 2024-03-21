@@ -1,7 +1,7 @@
 export class SigninPage{
-    Login(){
+    Login(email){
         cy.get(".ant-typography.fs-18px.medium").should('contain','Welcome Back!')
-        cy.get("#username").type('alexceaki+0141@gmail.com')
+        cy.get("#username").type(email)
         cy.get("#password").type('testTest1')
         cy.get("button[type='submit'] span").should('be.visible').click({force:true})
     }

@@ -5,7 +5,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl : "https://webapp8.volopa.com/login",
+    baseUrl : "https://uiredevelopment.volopa.com/login",
     "pageLoadTimeout" : 30000,
     "defaultCommandTimeout" : 30000
   },

@@ -34,58 +34,39 @@ cy.get(variable1.walletPageLocators.convert_balance).should('be.visible')
 cy.get(variable1.walletPageLocators.fundCard).should('be.visible')
 cy.get(variable1.walletPageLocators.fundWallet).should('be.visible')
 }    
-Validate_total_Balance(){
+Validate_wallet_total_Balance(){
  // getting and validate amount 
+ let Total
  cy.wait(3000)
-cy.get('div[class="ant-col"] [class="ant-typography  bold fs-28px"]').eq(0).then($element=>{
-cy.wrap($element).as('Totalamount')
-})
-let value
-let wbalance
-let cbalance
+cy.get("body > div:nth-child(2) > section:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(1)").then((value1)=>{
+  
+  let Total=value1.text().trim()
+ Total = Total.replace(/,/g, '').replace("€", "").replace(/&nbsp;/g, '');
+ cy.log(Total)
+
+ //cy.wrap(Total).as('Totalamount')
+
+let wbalance, cbalance
 cy.wait(3000)
 cy.get('div[class="ant-col"] [class="ant-typography  bold fs-28px"]').eq(1).then((ele)=>{
   wbalance= ele.text().trim()
-  cy.log(ele)
-  cy.pause()
-  wbalance = wbalance.replace(/,/g, '');
+  wbalance = wbalance.replace(/,/g, '').replace("€", "");
   cy.log(wbalance)
-  if (!isNaN(wbalance)) {
-    // Add floatValue to totalValue
-    value += wbalance;
-
-    // Log the total value
-    cy.log('Total value:', value);
-  } else {
-    // Handle the case where floatValue is not a valid number
-    cy.log('Invalid floating-point value:', wbalance);
-  }
-
-  cy.log(value)
-cy.wait(2000)
-cy.get('div[class="ant-col"] [class="ant-typography  bold fs-28px pointer').then((ele1)=>{
-  cy.log(ele1)
-  cbalance=ele1.text().trim()
-  cbalance = cbalance.replace(/,/g, '');
-  cy.log(cbalance)
-  if (!isNaN(cbalance)) {
-    // Add floatValue to totalValue
-    value += cbalance;
-
-    // Log the total value
-    cy.log('Total value:', value);
-  } else {
-    // Handle the case where floatValue is not a valid number
-    cy.log('Invalid floating-point value:', cbalance);
-  }
   
-  cy.log(value)
-  cy.get('@Totalamount').then(Totalamount=>
-    {
-  //expect(cy.wrap(value).to.be.eq(Totalamount))
-  //expect(value).to.eq(Totalamount)
-  cy.wrap(value).should('eq', Totalamount);
+  cy.wait(2000)
+  cy.get('div[class="ant-col"] [class="ant-typography  bold fs-28px pointer').then((ele1)=>{
+    cy.log(ele1)
+    cbalance=ele1.text().trim()
+    cbalance = cbalance.replace(/,/g, '').replace("€", "");
+  
+    cy.log(cbalance)
+    const  value =(parseFloat(wbalance)+parseFloat(cbalance)).toFixed(2);
+  
+    cy.log('Total value:', value);
+    cy.log(Total)
+    cy.wrap(parseFloat(value)).should('eq', parseFloat(Total));
     })
+
 })
 })
 }
@@ -101,7 +82,7 @@ validate_RateChecker_Calculator(){
   this.VerifyConvertionComleted()
 }
 //check total wallet balnace from convert balance from wallet dash board 
-Total_Wallet_Balance(){
+Total_Wallet_BalanceinEUR(){
   cy.get(variable1.walletPageLocators.convert_balance).click()
  // cy.get(variable.CompanyWalletBalance.Viewallcurrencies).click()
   let sum = 0;
@@ -219,15 +200,28 @@ validate_Insificent_balance (){
     
 })
 }
-validateFundWallet(){
+validate_Fund_Wallet(){
+  let amount1,amount;
     cy.get(variable1.walletPageLocators.fundWallet).click()
     cy.get(variable1.walletPageLocators.fundWalletPage).should('have.text','Fund Your Company Wallet')
     cy.get(variable1.walletPageLocators.currency1).type('GBP{enter}')
     cy.get(variable1.walletPageLocators.amount1).type(100)
     cy.get(variable1.walletPageLocators.description1).type('script testing')
-    cy.get(variable1.walletPageLocators.confirmButton1).should('be.visible')
-    cy.get(variable1.walletPageLocators.confirmButton1).click()
+    cy.get(variable1.walletPageLocators.confirmButton1).should('be.visible').click({force:true})
     cy.wait(5000)
+    cy.get(".ant-typography.ant-typography-success.medium.fs-18px.center-align-text").should('contain','Fund via Easy Transfer (Open Banking)')
+    cy.get(variable1.walletPageLocators.popupconfirmbutton).click({force:true})
+    cy.get(variable1.walletPageLocators.bankpagetital).should('contain','Choose your bank')
+    cy.get(variable1.walletPageLocators.searchbaryapli).type('Modelo Sandbox','enter')
+    cy.get(variable1.walletPageLocators.reviewdetailheading).should('include','Review details')
+    cy.get(variable1.walletPageLocators.amountverify).invoke('text').then((ele)=>{
+      amount1=ele.trim()
+      cy.log('amount', amount1)
+    })
+    cy.get(variable1.walletPageLocators.continubutton).click()
+    cy.get(variable1.walletPageLocators.approvepaymnttital).should('contain','Approve your payment')
+    cy.get(variable1.walletPageLocators.linkonline).click()
+    
     cy.get(variable1.walletPageLocators.passwordField).type('testTest1')
 }
 unhappySearch(){
@@ -333,4 +327,5 @@ validateAmountSorting() {
       cy.log('No more pages to validate');
     }
   });
+  
 }}//class end
